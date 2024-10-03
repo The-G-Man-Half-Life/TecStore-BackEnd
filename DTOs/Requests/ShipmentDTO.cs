@@ -1,16 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class ShipmentDto
+public class ShipmentDTO
 {
     [Required]
-    public int ShipmentId { get; set; }
+    public double ShipmentWeightKG { get; set; }
 
     [Required]
-    public double ShipmentWeight { get; set; }
-
-    [Required]
-    public double ShipmentPrice { get; set; }
+    public double ShipmentPriceUSA { get; set; }
 
     [Required]
     [DataType(DataType.Date)]
