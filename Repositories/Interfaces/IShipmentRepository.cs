@@ -5,7 +5,6 @@ public interface IShipmentRepository
 {
     Task<IEnumerable<Shipment>> GetAll();
     Task<Shipment?> GetById(int id);
-    Task<IEnumerable<Shipment>> GetByKeyword(string keyword);
     Task Add(Shipment shipment);
     Task Update(Shipment shipment);
     Task Delete(int id);
