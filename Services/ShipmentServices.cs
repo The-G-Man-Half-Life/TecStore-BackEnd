@@ -20,7 +20,7 @@ public class ShipmentServices : IShipmentRepository
         {
             return await Context.Shipments.ToListAsync();
         }
-        catch (System.Exception)
+        catch (DbUpdateException dbEX)
         {
             
             throw new Exception("Un error ocurrio");
@@ -33,7 +33,7 @@ public class ShipmentServices : IShipmentRepository
         {
             return await Context.Shipments.FirstOrDefaultAsync(s=>s.Shipment_id == id);
         }
-        catch (System.Exception)
+        catch (DbUpdateException dbEX)
         {
             
             throw new Exception("Un error ocurrio durante el proceso");
@@ -46,7 +46,7 @@ public class ShipmentServices : IShipmentRepository
             await Context.Shipments.AddAsync(shipment);
             await Context.SaveChangesAsync();
         }
-        catch (System.Exception)
+        catch (DbUpdateException dbEX)
         {
             
             throw new Exception("Un error ocurrio durante el proceso");
@@ -59,7 +59,7 @@ public class ShipmentServices : IShipmentRepository
             Context.Shipments.Update(shipment);
             await Context.SaveChangesAsync();
         }
-        catch (System.Exception)
+        catch (DbUpdateException dbEX)
         {
             
             throw new Exception("Un error ocurrio durante el proceso");
@@ -73,7 +73,7 @@ public class ShipmentServices : IShipmentRepository
             Context.Shipments.Remove(user);
             await Context.SaveChangesAsync();
         }
-        catch (System.Exception)
+        catch (DbUpdateException dbEX)
         {
             
             throw new Exception("Un error ocurrio durante el proceso");

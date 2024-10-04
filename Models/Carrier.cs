@@ -9,7 +9,7 @@ public class Carrier
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("shipment_id")]
-    public int Shipment_id {get; set;}
+    public int Carrier_id {get; set;}
 
     [Column("carrier_name")]
     public string Carrier_name {get; set;}
