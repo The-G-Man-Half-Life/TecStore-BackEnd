@@ -28,7 +28,7 @@ public class Shipment
     public Carrier? Carrier {get; set;}
 
 
-    public Shipment(int Shipment_id, double Shipment_weight_kg, double Shipment_price_usa, DateOnly Shipment_order_date, DateOnly Shipment_arrival_date, int Carrier_id)
+    public Shipment(double Shipment_weight_kg, double Shipment_price_usa, DateOnly Shipment_order_date, DateOnly Shipment_arrival_date, int Carrier_id)
     {
         this.Shipment_weight_kg = Shipment_weight_kg;
         this.Shipment_price_usa = Shipment_price_usa;
