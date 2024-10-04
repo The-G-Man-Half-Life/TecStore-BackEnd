@@ -9,6 +9,8 @@ namespace TechStore_BackEnd.Controllers.v1.Shipments
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName ="v1")]
+    [Tags("Shipments")]
     public class ShipmentDeleteController(ShipmentServices ShipmentServices) : ShipmentController(ShipmentServices)
     {
         [HttpDelete("{id}")]

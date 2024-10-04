@@ -11,6 +11,8 @@ namespace TechStore_BackEnd.Controllers.v1.Shipments
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName ="v1")]
+    [Tags("Shipments")]
     public class ShipmentCreateController(ShipmentServices ShipmentServices) : ShipmentController(ShipmentServices)
     {
         [HttpPost]
