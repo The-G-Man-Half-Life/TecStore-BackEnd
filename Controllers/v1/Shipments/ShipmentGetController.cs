@@ -26,7 +26,15 @@ public async Task<ActionResult<IEnumerable<Shipment>>> GetAll()
 [HttpGet("{id}")]
 public async Task<ActionResult<Shipment>> GetById([FromRoute] int id)
 {
-    var shipment = await ShipmentServices.GetById(id);
-    return Ok(shipment);
+    if (await ShipmentServices.CheckExistence(id) == false)
+    {
+        return NoContent();
+    }
+    else
+    {
+        var shipment = await ShipmentServices.GetById(id);
+        return Ok(shipment);
+    }
+
 }
 }
