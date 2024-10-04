@@ -8,7 +8,7 @@ using TechStore_BackEnd.Services;
 namespace TechStore_BackEnd.Controllers.v1.Shipments;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/Shipments/[controller]")]
 [ApiExplorerSettings(GroupName ="v1")]
 [Tags("Shipments")]
 public class ShipmentUpdateController(ShipmentServices ShipmentServices) : ShipmentController(ShipmentServices)
