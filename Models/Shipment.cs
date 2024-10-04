@@ -6,6 +6,8 @@ namespace TechStore_BackEnd.Models;
 [Table("Shipments")]
 public class Shipment
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("shipment_id")]
     public int Shipment_id  {get; set;}
 
