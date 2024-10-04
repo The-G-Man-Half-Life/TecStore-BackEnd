@@ -21,17 +21,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options=>
     options.UseMySql(connectionString, ServerVersion.Parse("8.0.20-mysql")));
 
 builder.Services.AddScoped<IShipmentRepository, ShipmentServices>();
+builder.Services.AddScoped<ShipmentServices>();
+builder.Services.AddScoped<ICarrierRepository, CarrierServices>(); 
+builder.Services.AddScoped<CarrierServices>();
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c=>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo
+builder.Services.AddSwaggerGen(c =>
     {
-        Title = "TechStore",
-        Version = "v1"
-    });
-    // c.DocumentFilter<CustomOperationOrderingFilter>();
-});
-
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechStore", Version = "v1" });
+        c.SwaggerDoc("v2", new OpenApiInfo { Title = "TechStore", Version = "v2" });
+        c.EnableAnnotations();
+    }
+);
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -40,7 +41,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(
         options =>
         {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json","Version 1");
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1");
+            options.SwaggerEndpoint("/swagger/v2/swagger.json", "Version 2");
         }
     );
 }

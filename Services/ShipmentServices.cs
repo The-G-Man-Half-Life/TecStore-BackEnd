@@ -22,8 +22,7 @@ public class ShipmentServices : IShipmentRepository
         }
         catch (DbUpdateException dbEX)
         {
-            
-            throw new Exception("Un error ocurrio");
+            throw new Exception($"Un error ocurrio {dbEX.Message}");
         }
     }
 
@@ -35,21 +34,27 @@ public class ShipmentServices : IShipmentRepository
         }
         catch (DbUpdateException dbEX)
         {
-            
-            throw new Exception("Un error ocurrio durante el proceso");
+            throw new Exception($"Un error ocurrio {dbEX.Message}");
         }
     }
 
     public async Task Add(Shipment shipment){
-        try
+        if (shipment == null)
         {
-            await Context.Shipments.AddAsync(shipment);
-            await Context.SaveChangesAsync();
+            throw new ArgumentNullException(nameof(shipment), "el transportador no puede ser nulo");
         }
-        catch (DbUpdateException dbEX)
+        else
         {
-            
-            throw new Exception("Un error ocurrio durante el proceso");
+            try
+            {
+                await Context.Shipments.AddAsync(shipment);
+                await Context.SaveChangesAsync();
+            }
+            catch (DbUpdateException dbEX)
+            {
+
+                throw new Exception("Un error ocurrio", dbEX);
+            }
         }
     }
 
@@ -61,8 +66,7 @@ public class ShipmentServices : IShipmentRepository
         }
         catch (DbUpdateException dbEX)
         {
-            
-            throw new Exception("Un error ocurrio durante el proceso");
+            throw new Exception($"Un error ocurrio {dbEX.Message}");
         }
     }
 
@@ -70,13 +74,14 @@ public class ShipmentServices : IShipmentRepository
         try
         {
             var user = await GetById(id);
-            Context.Shipments.Remove(user);
+            if(user != null){
+                Context.Shipments.Remove(user);
+            }
             await Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)
         {
-            
-            throw new Exception("Un error ocurrio durante el proceso");
+            throw new Exception($"Un error ocurrio {dbEX.Message}");
         }
     }
 

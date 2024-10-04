@@ -1,39 +1,45 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Bogus.DataSets;
 using Microsoft.AspNetCore.Mvc;
+using TechStore_BackEnd.Controllers.v1.Carriers;
 using TechStore_BackEnd.Models;
 using TechStore_BackEnd.Services;
 
-namespace TechStore_BackEnd.Controllers.v1.Shipments
+namespace TechStore_BackEnd.Controllers.v1.Shipments;
+
+[ApiController]
+[Route("api/v1/Shipments/[controller]")]
+[ApiExplorerSettings(GroupName = "v1")]
+[Tags("Shipments")]
+public class ShipmentCreateController: ShipmentController
 {
-    [ApiController]
-    [Route("api/v1/Shipments/[controller]")]
-    [ApiExplorerSettings(GroupName ="v1")]
-    [Tags("Shipments")]
-    public class ShipmentCreateController(ShipmentServices ShipmentServices) : ShipmentController(ShipmentServices)
+    private readonly ShipmentServices ShipmentServices;
+
+    public ShipmentCreateController(ShipmentServices ShipmentServices) : base(ShipmentServices)
     {
-        [HttpPost]
-        public async Task<IActionResult> CreateNewShipment([FromBody]ShipmentDTO ShipmentDTO)
+        this.ShipmentServices = ShipmentServices;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateNewCarrier([FromBody]ShipmentDTO ShipmentDTO)
+    {
+        if(ModelState.IsValid == false)
         {
-            if (ModelState.IsValid == false)
-            {
-                return NotFound("Something is wrong about the creation");
-            }
-            else
-            {
-                var newShipment = new Shipment(
-                    ShipmentDTO.ShipmentWeightKG,
-                    ShipmentDTO.ShipmentPriceUSA,
-                    ShipmentDTO.ShipmentArrivalDate,
-                    ShipmentDTO.ShipmentOrderDate,
-                    ShipmentDTO.CarrierId
-                );
-                await ShipmentServices.Add(newShipment);
-                return Ok("se agrego exitosamente");
-            }
+            return BadRequest("The model is bad done");
+        }
+        else if(ShipmentDTO == null)
+        {
+            return BadRequest("The model can not be null");
+        }
+        else
+        {
+            var newShipment = new Shipment(
+                ShipmentDTO.ShipmentWeightKG,
+                ShipmentDTO.ShipmentPriceUSA,
+                ShipmentDTO.ShipmentOrderDate,
+                ShipmentDTO.ShipmentArrivalDate,
+                ShipmentDTO.CarrierId
+            );
+            await ShipmentServices.Add(newShipment);
+            return Ok(newShipment);
         }
     }
 }

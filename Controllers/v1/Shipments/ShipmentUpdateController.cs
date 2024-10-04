@@ -11,8 +11,15 @@ namespace TechStore_BackEnd.Controllers.v1.Shipments;
 [Route("api/v1/Shipments/[controller]")]
 [ApiExplorerSettings(GroupName ="v1")]
 [Tags("Shipments")]
-public class ShipmentUpdateController(ShipmentServices ShipmentServices) : ShipmentController(ShipmentServices)
+public class ShipmentUpdateController : ShipmentController
 {
+    public readonly ShipmentServices ShipmentServices;
+
+    public ShipmentUpdateController(ShipmentServices ShipmentServices): base (ShipmentServices)
+    {
+        this.ShipmentServices = ShipmentServices;
+    }
+
     [HttpPut("{id}")]
     public async Task<IActionResult> update([FromRoute] int id,[FromBody]ShipmentDTO shipmentDTO)
     {
@@ -31,6 +38,7 @@ public class ShipmentUpdateController(ShipmentServices ShipmentServices) : Shipm
         }
         else
         {
+            shipment.Shipment_id = id;
             shipment.Shipment_weight_kg = shipmentDTO.ShipmentWeightKG;
             shipment.Shipment_price_usa = shipmentDTO.ShipmentPriceUSA;
             shipment.Shipment_order_date = shipmentDTO.ShipmentOrderDate;

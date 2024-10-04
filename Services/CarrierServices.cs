@@ -11,22 +11,14 @@ public class CarrierServices : ICarrierRepository
 {
     public readonly ApplicationDbContext Context;
 
-    public CarrierServices(ApplicationDbContext Context)
+    public CarrierServices(ApplicationDbContext context)
     {
-        this.Context = Context;
+        Context = context;
     }
 
     public async Task<IEnumerable<Carrier>> GetAll()
     {
-        try
-        {
-            return await Context.Carriers.ToListAsync();
-        }
-        catch (DbUpdateException dbEX)
-        {
-            throw new Exception("Un error ocurrio", dbEX);
-
-        }
+        return await Context.Carriers.ToListAsync();
     }
     public async Task<Carrier?> GetById(int id)
     {
@@ -51,6 +43,7 @@ public class CarrierServices : ICarrierRepository
             try
             {
                 await Context.Carriers.AddAsync(Carrier);
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateException dbEX)
             {
@@ -71,7 +64,7 @@ public class CarrierServices : ICarrierRepository
         {
             try
             {
-                Context.Carriers.Update(Carrier);
+                Context.Update(Carrier);
                 await Context.SaveChangesAsync();
             }
             catch (DbUpdateException dbEX)
@@ -88,7 +81,11 @@ public class CarrierServices : ICarrierRepository
         try
         {
             var carrier = await GetById(id);
-            Context.Carriers.Remove(carrier);
+            if (carrier != null)
+            {
+                Context.Carriers.Remove(carrier);
+            }
+            
             await Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)

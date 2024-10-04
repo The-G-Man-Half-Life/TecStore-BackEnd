@@ -8,7 +8,7 @@ public class Carrier
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("shipment_id")]
+    [Column("carrier_id")]
     public int Carrier_id {get; set;}
 
     [Column("carrier_name")]

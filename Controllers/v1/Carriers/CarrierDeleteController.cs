@@ -1,10 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TechStore_BackEnd.Repositories.Interfaces;
 using TechStore_BackEnd.Services;
 
 namespace TechStore_BackEnd.Controllers.v1.Carriers;
-public class CarrierDeleteController(CarrierServices CarrierServices): CarrierController(CarrierServices)
+
+[ApiController]
+[Route("api/v1/Carriers/[controller]")]
+[ApiExplorerSettings(GroupName ="v1")]
+[Tags("Carriers")]
+public class CarrierDeleteController: CarrierController
 {
+    private readonly CarrierServices CarrierServices;
+
+    public CarrierDeleteController(CarrierServices CarrierServices) : base(CarrierServices)
+    {
+        this.CarrierServices = CarrierServices;
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCarrier([FromRoute] int id)
     {
@@ -16,7 +29,7 @@ public class CarrierDeleteController(CarrierServices CarrierServices): CarrierCo
         {
             try
             {
-                await CarrierServices.Delete(id);
+                await CarrierRepository.Delete(id);
                 return Ok("fue un exito");
             }
             catch (DbUpdateException dbEX)

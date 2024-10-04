@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TechStore_BackEnd.Repositories.Interfaces;
 using TechStore_BackEnd.Services;
 
 namespace TechStore_BackEnd.Controllers.v1.Carriers;
@@ -7,7 +8,7 @@ namespace TechStore_BackEnd.Controllers.v1.Carriers;
 [Route("api/v1/Carriers/[controller]")]
 [ApiExplorerSettings(GroupName ="v1")]
 [Tags("Carriers")]
-public class CarrierController(CarrierServices CarrierServices): ControllerBase
+public class CarrierController(ICarrierRepository CarrierRepository): ControllerBase
 {
-    protected readonly CarrierServices CarrierServices  = CarrierServices;
+    protected readonly ICarrierRepository CarrierRepository  = CarrierRepository;
 }

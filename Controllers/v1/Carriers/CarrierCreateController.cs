@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using TechStore_BackEnd.DTOs.Requests;
 using TechStore_BackEnd.Models;
@@ -14,8 +9,15 @@ namespace TechStore_BackEnd.Controllers.v1.Carriers;
 [Route("api/v1/Carriers/[controller]")]
 [ApiExplorerSettings(GroupName ="v1")]
 [Tags("Carriers")]
-public class CarrierCreateController(CarrierServices CarrierServices): CarrierController (CarrierServices)
+public class CarrierCreateController : CarrierController
 {
+    private readonly CarrierServices CarrierServices;
+
+    public CarrierCreateController(CarrierServices CarrierServices) : base(CarrierServices)
+    {
+        this.CarrierServices = CarrierServices;
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateNewCarrier([FromBody]CarrierDTO CarrierDTO)
     {

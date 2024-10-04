@@ -11,8 +11,14 @@ namespace TechStore_BackEnd.Controllers.v1.Shipments
     [Route("api/v1/Shipments/[controller]")]
     [ApiExplorerSettings(GroupName ="v1")]
     [Tags("Shipments")]
-    public class ShipmentDeleteController(ShipmentServices ShipmentServices) : ShipmentController(ShipmentServices)
+    public class ShipmentDeleteController: ShipmentController
     {
+        public readonly ShipmentServices ShipmentServices;
+        public ShipmentDeleteController(ShipmentServices ShipmentServices): base(ShipmentServices)
+        {
+            this.ShipmentServices = ShipmentServices;
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
