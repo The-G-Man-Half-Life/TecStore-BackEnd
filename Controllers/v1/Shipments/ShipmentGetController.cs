@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using TechStore_BackEnd.Models;
 using TechStore_BackEnd.Services;
 
 namespace TechStore_BackEnd.Controllers.v1.Shipments;
@@ -13,17 +15,18 @@ namespace TechStore_BackEnd.Controllers.v1.Shipments;
 [Tags("Shipments")]
 public class ShipmentGetController(ShipmentServices ShipmentServices) : ShipmentController(ShipmentServices)
 {
-    [HttpGet]
-    public async Task<IActionResult<IEnumerable<Shipments>>> GetAll()
-    {
-        var shipments =await ShipmentServices.GetAll();
-        if (shipments.Count()== 0)
-        {
-            return NoContent();
-        }
-        else
-        {
-            await ShipmentServices.GetAll();
-        }
-    }
+
+[HttpGet]
+public async Task<ActionResult<IEnumerable<Shipment>>> GetAll()
+{
+    var shipments = await ShipmentServices.GetAll();
+    return Ok(shipments);
+}
+
+[HttpGet("{id}")]
+public async Task<ActionResult<Shipment>> GetById([FromRoute] int id)
+{
+    var shipment = await ShipmentServices.GetById(id);
+    return Ok(shipment);
+}
 }
