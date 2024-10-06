@@ -8,7 +8,7 @@ public class BrandServices: IBrandRepository
 {
     public readonly ApplicationDbContext Context;
 
-    public BrandServices(ApplicationDbContext context)
+    public BrandServices(ApplicationDbContext Context)
     {
         this.Context = Context;
     }
@@ -43,6 +43,7 @@ public class BrandServices: IBrandRepository
         try
         {
             await Context.Brands.AddAsync(Brand);
+            await Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)
         {
@@ -56,6 +57,7 @@ public class BrandServices: IBrandRepository
         try
         {
             Context.Brands.Update(Brand);
+            await Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)
         {
@@ -69,7 +71,8 @@ public class BrandServices: IBrandRepository
         try
         {
             var brandFound = await GetById(id);
-            Context.Brands.Update(brandFound);
+            Context.Brands.Remove(brandFound);
+            Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)
         {

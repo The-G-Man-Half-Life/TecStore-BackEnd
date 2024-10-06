@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TechStore_BackEnd.DTOs.Requests;
 using TechStore_BackEnd.Models;
 using TechStore_BackEnd.Services;
@@ -18,24 +19,32 @@ public class BrandCreateController : BrandController
         this.BrandServices = BrandServices;
     }
     [HttpPost]
-    public async Task<IActionResult> CreateNewBrand([FromBody]BrandDTO BrandDTO)
+    public async Task<IActionResult> CreateNewBrand([FromBody] BrandDTO BrandDTO)
     {
-        if(ModelState.IsValid == false)
+        if (ModelState.IsValid == false)
         {
             return BadRequest("The model is bad done");
         }
-        else if(BrandDTO == null)
+        else if (BrandDTO == null)
         {
             return BadRequest("The model can not be null");
         }
         else
         {
-            var newBrand = new Brand(
+            try
+            {
+                var newBrand = new Brand(
                 BrandDTO.Brand_name,
                 BrandDTO.Brand_description
             );
-            await BrandServices.Add(newBrand);
-            return Ok(BrandServices);
+                await BrandServices.Add(newBrand);
+                return Ok(newBrand);
+            }
+            catch (DbUpdateException dbEX)
+            {
+                throw new Exception("Un error ocurrio",dbEX);
+            }
+
         }
     }
 }
