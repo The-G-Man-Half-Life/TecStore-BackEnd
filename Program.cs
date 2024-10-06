@@ -24,6 +24,9 @@ builder.Services.AddScoped<IShipmentRepository, ShipmentServices>();
 builder.Services.AddScoped<ShipmentServices>();
 builder.Services.AddScoped<ICarrierRepository, CarrierServices>(); 
 builder.Services.AddScoped<CarrierServices>();
+builder.Services.AddScoped<IBrandRepository, BrandServices>();
+builder.Services.AddScoped<BrandServices>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

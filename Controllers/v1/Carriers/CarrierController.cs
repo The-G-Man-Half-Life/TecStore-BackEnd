@@ -8,7 +8,12 @@ namespace TechStore_BackEnd.Controllers.v1.Carriers;
 [Route("api/v1/Carriers/[controller]")]
 [ApiExplorerSettings(GroupName ="v1")]
 [Tags("Carriers")]
-public class CarrierController(ICarrierRepository CarrierRepository): ControllerBase
+public class CarrierController: ControllerBase
 {
-    protected readonly ICarrierRepository CarrierRepository  = CarrierRepository;
+    protected readonly ICarrierRepository CarrierRepository;
+
+    public CarrierController(ICarrierRepository CarrierRepository)
+    {
+        this.CarrierRepository = CarrierRepository;
+    }
 }
