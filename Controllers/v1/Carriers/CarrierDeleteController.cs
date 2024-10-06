@@ -29,7 +29,7 @@ public class CarrierDeleteController: CarrierController
         {
             try
             {
-                await CarrierRepository.Delete(id);
+                await CarrierServices.Delete(id);
                 return Ok("fue un exito");
             }
             catch (DbUpdateException dbEX)

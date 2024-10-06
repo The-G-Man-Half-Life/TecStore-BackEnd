@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using TechStore_BackEnd.Data;
 using TechStore_BackEnd.Models;
+using TechStore_BackEnd.Repositories.Interfaces;
 
 namespace TechStore_BackEnd.Services;
-public class BrandServices
+public class BrandServices: IBrandRepository
 {
     public readonly ApplicationDbContext Context;
 

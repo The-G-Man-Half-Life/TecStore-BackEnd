@@ -12,10 +12,10 @@ public class Brand
     public int Brand_id {get; set;}
     
     [Column("brand_name")]
-    public required string Brand_name {get; set;}
+    public string Brand_name {get; set;}
     
     [Column("brand_description")]
-    public required string Brand_description {get; set;}
+    public string Brand_description {get; set;}
 
     public Brand(string Brand_name, string Brand_description)
     {

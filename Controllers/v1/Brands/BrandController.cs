@@ -4,10 +4,12 @@ using TechStore_BackEnd.Repositories.Interfaces;
 namespace TechStore_BackEnd.Controllers.v1.Brands;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/Brands/[controller]")]
+[ApiExplorerSettings(GroupName ="v1")]
+[Tags("Brands")]
 public class BrandController : ControllerBase
 {   
-    private readonly IBrandRepository BrandRepository;
+    protected readonly IBrandRepository BrandRepository;
 
     public BrandController(IBrandRepository BrandRepository)
     {

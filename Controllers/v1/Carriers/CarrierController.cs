@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using TechStore_BackEnd.Repositories.Interfaces;
-using TechStore_BackEnd.Services;
 
 namespace TechStore_BackEnd.Controllers.v1.Carriers;
 
