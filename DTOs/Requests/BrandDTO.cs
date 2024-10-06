@@ -10,5 +10,5 @@ public class BrandDTO
 
         [Required]
         [DataType(DataType.MultilineText)]
-        public required string Brand_description { get; set; }
+        public required string Brand_description {get; set;}
 }
