@@ -9,11 +9,11 @@ namespace TechStore_BackEnd.Controllers.v1.Brands;
 [Route("api/v1/Brands/[controller]")]
 [ApiExplorerSettings(GroupName = "v1")]
 [Tags ("Brands")]
-public class BrandGetController : ControllerBase
+public class BrandGetController : BrandController
 {
     public readonly BrandServices BrandServices;
 
-    public BrandGetController(BrandServices BrandServices)
+    public BrandGetController(BrandServices BrandServices): base(BrandServices)
     {
         this.BrandServices = BrandServices;
     }

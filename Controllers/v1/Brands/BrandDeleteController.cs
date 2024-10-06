@@ -10,11 +10,11 @@ namespace TechStore_BackEnd.Controllers.v1.Brands;
 [ApiExplorerSettings(GroupName = "v1")]
 [Tags("Brands")]
 
-public class BrandDeleteController : ControllerBase
+public class BrandDeleteController : BrandController
 {
     public readonly BrandServices BrandServices;
 
-    public BrandDeleteController(BrandServices BrandServices)
+    public BrandDeleteController(BrandServices BrandServices): base(BrandServices)
     {
         this.BrandServices = BrandServices;
     }
