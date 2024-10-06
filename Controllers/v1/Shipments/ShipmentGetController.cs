@@ -23,7 +23,7 @@ public class ShipmentGetController : ShipmentController
     }
 
 [HttpGet]
-public async Task<ActionResult<IEnumerable<Shipment>>> GetAll()
+public async Task<ActionResult<IEnumerable<ShipmentDTO>>> GetAll()
 {
     var shipments = await ShipmentServices.GetAll();
     return Ok(shipments);

@@ -31,19 +31,21 @@ public class ShipmentUpdateController : ShipmentController
         {
             return NotFound("El modelo debe de ser valido");
         }
-        var shipment = await ShipmentServices.GetById(id);
+        var shipment =await ShipmentServices.GetById2(id);
         if (shipment == null)
         {
             return NotFound("No se encontro el objeto por su id");
         }
         else
-        {
+        { 
+                
             shipment.Shipment_id = id;
             shipment.Shipment_weight_kg = shipmentDTO.ShipmentWeightKG;
             shipment.Shipment_price_usa = shipmentDTO.ShipmentPriceUSA;
             shipment.Shipment_order_date = shipmentDTO.ShipmentOrderDate;
             shipment.Shipment_arrival_date = shipmentDTO.ShipmentArrivalDate;
             shipment.Carrier_id = shipmentDTO.CarrierId;
+                
             await ShipmentServices.Update(shipment);
             return Ok("se agrego exitosamente");
         }

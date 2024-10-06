@@ -14,11 +14,21 @@ public class ShipmentServices : IShipmentRepository
         this.Context = Context;
     }
 
-    public async Task<IEnumerable<Shipment>> GetAll()
+    public async Task<IEnumerable<ShipmentDTO>> GetAll()
     {
         try
         {
-            return await Context.Shipments.ToListAsync();
+            var shipmentsAsDTOs = await Context.Shipments.Select(s => new ShipmentDTO
+            {
+                ShipmentWeightKG = s.Shipment_weight_kg,
+                ShipmentPriceUSA = s.Shipment_price_usa,
+                ShipmentOrderDate = s.Shipment_order_date,
+                ShipmentArrivalDate = s.Shipment_arrival_date,
+                CarrierId = s.Carrier_id
+            }).ToListAsync();
+
+
+            return shipmentsAsDTOs;
         }
         catch (DbUpdateException dbEX)
         {
@@ -26,7 +36,27 @@ public class ShipmentServices : IShipmentRepository
         }
     }
 
-    public async Task<Shipment?> GetById(int id){
+    public async Task<ShipmentDTO?> GetById(int id){
+
+        try
+        {
+            var shipmentModel = await Context.Shipments.FirstOrDefaultAsync(s=>s.Shipment_id == id);
+            var shipmentDTO = new ShipmentDTO{
+       
+                    ShipmentWeightKG = shipmentModel.Shipment_weight_kg, 
+                    ShipmentPriceUSA = shipmentModel.Shipment_price_usa,
+                    ShipmentOrderDate = shipmentModel.Shipment_order_date,
+                    ShipmentArrivalDate = shipmentModel.Shipment_arrival_date,
+                    CarrierId = shipmentModel.Carrier_id
+                };
+            return shipmentDTO;
+        }
+        catch (DbUpdateException dbEX)
+        {
+            throw new Exception($"Un error ocurrio {dbEX.Message}");
+        }
+}
+    public async Task<Shipment?> GetById2(int id){
 
         try
         {
@@ -73,7 +103,7 @@ public class ShipmentServices : IShipmentRepository
     public async Task Delete(int id){
         try
         {
-            var user = await GetById(id);
+            var user = await Context.Shipments.FirstOrDefaultAsync(s=>s.Shipment_id == id);
             if(user != null){
                 Context.Shipments.Remove(user);
             }

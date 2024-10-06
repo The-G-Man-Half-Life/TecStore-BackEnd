@@ -7497,19 +7497,19 @@
     ]
   },
   "packageFolders": {
-    "/home/riwip5-012/.nuget/packages/": {}
+    "C:\\Users\\Familiarr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/riwip5-012/Music/TechStore-BackEnd/TechStore-BackEnd.csproj",
+      "projectUniqueName": "C:\\Users\\Familiarr\\Documents\\TechStore-BackEnd\\TechStore-BackEnd.csproj",
       "projectName": "TechStore-BackEnd",
-      "projectPath": "/home/riwip5-012/Music/TechStore-BackEnd/TechStore-BackEnd.csproj",
-      "packagesPath": "/home/riwip5-012/.nuget/packages/",
-      "outputPath": "/home/riwip5-012/Music/TechStore-BackEnd/obj/",
+      "projectPath": "C:\\Users\\Familiarr\\Documents\\TechStore-BackEnd\\TechStore-BackEnd.csproj",
+      "packagesPath": "C:\\Users\\Familiarr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Familiarr\\Documents\\TechStore-BackEnd\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/riwip5-012/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Familiarr\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -7527,6 +7527,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -7593,7 +7598,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
