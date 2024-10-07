@@ -15,5 +15,7 @@ public class ApplicationDbContext: DbContext
     {
         base.OnModelCreating(modelBuilder);
         BrandSeeder.Seed(modelBuilder);
+        CarrierSeeder.Seed(modelBuilder);
+        ShipmentSeeder.Seed(modelBuilder);
     }
 }
