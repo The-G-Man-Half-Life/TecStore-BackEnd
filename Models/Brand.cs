@@ -21,5 +21,8 @@ public class Brand
     {
         this.Brand_name = Brand_name;
         this.Brand_description = Brand_description;
+        
     }
+
+    public Brand() {}
 }
