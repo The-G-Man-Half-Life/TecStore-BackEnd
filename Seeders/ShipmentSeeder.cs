@@ -22,7 +22,7 @@ public class ShipmentSeeder
                 .RuleFor(s => s.Shipment_price_usa, f => f.Random.Double(10.0, 1000.0)) // Precio entre 10 y 1000 USD
                 .RuleFor(s => s.Shipment_order_date, f => DateOnly.FromDateTime(f.Date.Past(1))) // Fecha de pedido en el último año
                 .RuleFor(s => s.Shipment_arrival_date, f => DateOnly.FromDateTime(f.Date.Future(1, DateTime.Now))) // Fecha de llegada en el próximo año
-                .RuleFor(s => s.Carrier_id, f => f.Random.Int(1, 100));
+                .RuleFor(s => s.Carrier_id, f => f.Random.Int(1, 50));
 
         return faker.Generate(count);
     }

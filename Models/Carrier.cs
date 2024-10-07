@@ -22,4 +22,5 @@ public class Carrier
         this.Carrier_name = Carrier_name;
         this.Carrier_description = Carrier_description;
     }
+    public Carrier() {}
 }

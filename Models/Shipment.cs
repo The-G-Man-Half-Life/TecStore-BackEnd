@@ -38,4 +38,5 @@ public class Shipment
         this.Shipment_arrival_date = Shipment_arrival_date;
         this.Carrier_id = Carrier_id;
     }
+    public Shipment() {}
 }
